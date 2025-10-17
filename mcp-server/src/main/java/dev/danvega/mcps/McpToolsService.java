@@ -34,27 +34,4 @@ public class McpToolsService {
 
         return userInfo;
     }
-
-    @McpTool(name = "getServerStatus", description = "Get server status (admin only)")
-    @PreAuthorize("hasAuthority('SCOPE_admin') or hasRole('ADMIN')")
-    public Map<String, Object> getServerStatus() {
-        Map<String, Object> status = new HashMap<>();
-        status.put("status", "healthy");
-        status.put("uptime", "running");
-        status.put("timestamp", LocalDateTime.now().toString());
-        status.put("javaVersion", System.getProperty("java.version"));
-        status.put("memoryUsage", getMemoryInfo());
-
-        return status;
-    }
-
-    private Map<String, Long> getMemoryInfo() {
-        Runtime runtime = Runtime.getRuntime();
-        Map<String, Long> memInfo = new HashMap<>();
-        memInfo.put("totalMemory", runtime.totalMemory());
-        memInfo.put("freeMemory", runtime.freeMemory());
-        memInfo.put("maxMemory", runtime.maxMemory());
-        memInfo.put("usedMemory", runtime.totalMemory() - runtime.freeMemory());
-        return memInfo;
-    }
 }

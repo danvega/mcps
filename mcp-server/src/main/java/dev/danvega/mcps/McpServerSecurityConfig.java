@@ -27,17 +27,11 @@ public class McpServerSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                // Allow public access to OAuth metadata for client discovery (RFC 9728)
-                // All other requests require authentication
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/.well-known/oauth-protected-resource/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                // Enable CORS for browser-based clients (MCP Inspector, etc.)
-                .cors(Customizer.withDefaults())
-                // Disable CSRF - not needed for stateless JWT-based APIs
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                // Configure OAuth2 on the MCP server
                 .with(
                         McpServerOAuth2Configurer.mcpServerOAuth2(),
                         (mcpAuthorization) -> {
@@ -50,10 +44,6 @@ public class McpServerSecurityConfig {
                 .build();
     }
 
-    /**
-     * CORS configuration for browser-based MCP clients (MCP Inspector, Claude Desktop, etc.)
-     * Allows all origins in development. In production, restrict to specific origins.
-     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
