@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: authorization-server
+
+  # GitHub OAuth2 configuration for federated login
+  # Create GitHub OAuth App at: https://github.com/settings/developers
+  # Authorization callback URL: http://localhost:9000/login/oauth2/code/github
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope:
+              - read:user
+              - user:email
+        provider:
+          github:
+            user-name-attribute: login
+
+# Server runs on port 9000 (MCP server runs on 8080)
+server:
+  port: 9000
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

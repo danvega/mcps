@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.6</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>dev.danvega</groupId>
+	<artifactId>mcps-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>mcps-parent</name>
+	<description>Secured MCP Server with Spring Authorization Server &amp; GitHub OAuth - Parent Project</description>
+
+	<modules>
+		<module>mcp-server</module>
+		<module>authorization-server</module>
+	</modules>
+
+	<properties>
+		<java.version>25</java.version>
+		<spring-ai.version>1.1.0-M3</spring-ai.version>
+		<spring-authorization-server.version>1.5.0</spring-authorization-server.version>
+		<mcp-server-security.version>0.0.3</mcp-server-security.version>
+		<mcp-authorization-server.version>0.0.3</mcp-authorization-server.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring AI BOM -->
+			<dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>${spring-ai.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring Authorization Server -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-oauth2-authorization-server</artifactId>
+				<version>${spring-authorization-server.version}</version>
+			</dependency>
+
+			<!-- MCP Community Security Dependencies -->
+			<dependency>
+				<groupId>org.springaicommunity</groupId>
+				<artifactId>mcp-server-security</artifactId>
+				<version>${mcp-server-security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springaicommunity</groupId>
+				<artifactId>mcp-authorization-server</artifactId>
+				<version>${mcp-authorization-server.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>
