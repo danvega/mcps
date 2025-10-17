@@ -1,9 +1,11 @@
-# Secured MCP Server with Spring Authorization Server
+# Secured MCP Server with Spring AI
 
 A demonstration of securing a Model Context Protocol (MCP) server using Spring Authorization Server and GitHub OAuth2. Users authenticate with GitHub, receive a JWT token, and use it to call secured MCP tools.
 
 **Based on the article by Daniel Garnier-Moiroux:**
 https://spring.io/blog/2025/09/30/spring-ai-mcp-server-security
+
+![Securing MCP Servers with Spring AI](./images/securing_mcp_servers.png)
 
 ## Architecture
 
